@@ -29,7 +29,7 @@ class ViewTestCase(TestCase):
 
     def setUp(self):
         """Define the test client and other test variables."""
-        user = User.objects.create_user(username="nerd", password="password123")
+        user = User.objects.create(username="nerd")
 
         self.client = APIClient()
         self.client.force_authenticate(user=user)

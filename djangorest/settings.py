@@ -10,7 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-import os
+import os, json
+
+with open('/etc/drf_bl_tutorial_config.json') as config_file:
+    config = json.load(config_file)
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -77,8 +81,12 @@ WSGI_APPLICATION = 'djangorest.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        "NAME": config["DRF_TUTORIAL_POSTGRES_DB"],
+        "USER": config["DRF_TUTORIAL_POSTGRES_USER_NAME"],
+        "PASSWORD": config["DRF_TUTORIAL_POSTGRES_PASSWORD"],
+        "HOST": config["DRF_TUTORIAL_POSTGRES_HOST"],
+        "PORT": config["DRF_TUTORIAL_POSTGRES_PORT"],
     }
 }
 
